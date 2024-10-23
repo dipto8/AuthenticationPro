@@ -10,6 +10,8 @@ import Register from "./Components/Register/Register.jsx";
 import Login from "./Components/Login/Login.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import ContextProvider from "./ContextProvider/ContextProvider.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
+import Orders from "./Components/Orders/Orders.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +31,8 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
-        path: "/nav",
-        element: "",
+        path: "/orders",
+        element: <PrivateRoute><Orders></Orders></PrivateRoute>,
       },
     ],
   },
