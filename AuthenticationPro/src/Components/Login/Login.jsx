@@ -1,25 +1,37 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../ContextProvider/ContextProvider";
 
 const Login = () => {
-  const {userSignIn} = useContext(AppContext)
+  const { userSignIn, signInWithGoogle } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    navigate("/profile");
 
-    userSignIn(email,password)
-    .then(result=>{
-      console.log(result.user)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
+    userSignIn(email, password)
+      .then((result) => {
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-   
+
   };
+      //Google SignIn
+      const handleGoogleSignIn = () => {
+        signInWithGoogle()
+          .then((result) => {
+            console.log(result.user);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -66,7 +78,15 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
-          <p>New here?please <Link to='/register'><a className="link text-purple-500">Register</a></Link></p>
+          <p>
+            New here?please{" "}
+            <Link to="/register">
+              <a className="link text-purple-500">Register</a>
+            </Link>
+          </p>
+          <p> <button onClick={handleGoogleSignIn}>Google</button>  </p>
+          
+          
         </div>
       </div>
     </div>

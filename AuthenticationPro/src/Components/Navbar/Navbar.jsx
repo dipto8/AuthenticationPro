@@ -5,13 +5,13 @@ import { AppContext } from "../../ContextProvider/ContextProvider";
 const Navbar = () => {
   const { user, logout } = useContext(AppContext);
 
-  const handleLogout =()=>{
+  const handleLogout = () => {
     logout()
-    .then(result=>{
-      console.log("user logged out")
-    })
-    .catch(error=>console.log(error))
-  }
+      .then((result) => {
+        console.log("user logged out");
+      })
+      .catch((error) => console.log(error));
+  };
   const navLinks = (
     <>
       <li>
@@ -23,9 +23,14 @@ const Navbar = () => {
       <li>
         <NavLink to="/register">Register</NavLink>
       </li>
-      <li>
-        <NavLink to="/orders">Orders</NavLink>
-      </li>
+      {user &&
+        <>
+          <li>
+            <NavLink to="/orders">Order summary</NavLink>
+          </li>
+          <li>   <NavLink to="/profile">Profile</NavLink></li>
+        </>
+      }
     </>
   );
 
@@ -65,15 +70,21 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end ">
-          {user ? <>
-            <span>{user.email}</span>
-            <a onClick={handleLogout} className="btn btn-sm ml-2 font-bold py-2 btn-primary">Logout</a>
-          </>
-          : <Link to='/login' className="underline text-purple-500">Please Signin</Link>
-          
-          
-          }
-          
+          {user ? (
+            <>
+              <span>{user.email}</span>
+              <a
+                onClick={handleLogout}
+                className="btn btn-sm ml-2 font-bold py-2 btn-primary"
+              >
+                Logout
+              </a>
+            </>
+          ) : (
+            <Link to="/login" className="underline text-purple-500">
+              Please Signin
+            </Link>
+          )}
         </div>
       </div>
     </div>

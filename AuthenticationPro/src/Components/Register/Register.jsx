@@ -16,7 +16,7 @@ const {createUser} =useContext(AppContext)
     //create user in Firebase
     createUser(email,password)
     .then(result=>{
-      console.log(result.user)
+      
     })
     .catch(error=>{
       console.log(error)
