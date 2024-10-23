@@ -1,55 +1,45 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import './index.css'
+import "./index.css";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Root from './Root/Root.jsx';
-import Home from './Components/Home/Home.jsx';
-import Register from './Components/Register/Register.jsx';
-import Login from './Components/Login/Login.jsx';
-import Navbar from './Components/Navbar/Navbar.jsx';
-import ContextProvider from './ContextProvider/ContextProvider.jsx';
-
-
-
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./Root/Root.jsx";
+import Home from "./Components/Home/Home.jsx";
+import Register from "./Components/Register/Register.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Navbar from "./Components/Navbar/Navbar.jsx";
+import ContextProvider from "./ContextProvider/ContextProvider.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
-    children:[
+    element: <Root />,
+    children: [
       {
-        path:"/",
-        element:<Home></Home>
-      },     {
-        path:"/register",
-        element:<Register></Register>
-      },     
-      {
-        path:"/login",
-        element:<Login></Login>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path:"/nav",
-        element:""
-      }
-    ]
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/nav",
+        element: "",
+      },
+    ],
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-  
-<ContextProvider>
-<RouterProvider router={router} />
-</ContextProvider>
-
-
-  
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
   </StrictMode>
-)
+);
