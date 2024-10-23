@@ -12,6 +12,11 @@ import Home from './Components/Home/Home.jsx';
 import Register from './Components/Register/Register.jsx';
 import Login from './Components/Login/Login.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
+import ContextProvider from './ContextProvider/ContextProvider.jsx';
+
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -39,6 +44,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  
+<ContextProvider>
+<RouterProvider router={router} />
+</ContextProvider>
+
+
+  
+  </StrictMode>
 )
