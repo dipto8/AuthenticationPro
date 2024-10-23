@@ -1,14 +1,30 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AppContext } from "../../ContextProvider/ContextProvider";
 
 const Navbar = () => {
-  const navLinks =<>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/login'>Login</NavLink></li>
-    <li><NavLink to='/register'>Register</NavLink></li>
-    
+  const { user, logout } = useContext(AppContext);
+
+  const handleLogout =()=>{
+    logout()
+    .then(result=>{
+      console.log("user logged out")
+    })
+    .catch(error=>console.log(error))
+  }
+  const navLinks = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">Register</NavLink>
+      </li>
     </>
- 
+  );
 
   return (
     <div>
@@ -35,18 +51,26 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-            {navLinks}
+              {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl text-purple-500">AuthenticationPro</a>
+          <a className="btn btn-ghost text-xl text-purple-500">
+            AuthenticationPro
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-          {navLinks}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end ">
+          {user ? <>
+            <span>{user.email}</span>
+            <a onClick={handleLogout} className="btn btn-sm ml-2 font-bold py-2 btn-primary">Logout</a>
+          </>
+          : <Link to='/login' className="underline text-purple-500">Please Signin</Link>
+          
+          
+          }
+          
         </div>
       </div>
     </div>

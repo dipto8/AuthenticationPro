@@ -4,7 +4,7 @@ import { AppContext } from "../../ContextProvider/ContextProvider";
 
 const Register = () => {
 const {createUser} =useContext(AppContext)
-console.log(createUser)
+
 
   const handleRegister = (e) => {
     e.preventDefault();
